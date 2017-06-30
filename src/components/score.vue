@@ -18,7 +18,7 @@
     data(){
       return{
         datas:this.scoredatas,
-        scoremsg:[]
+        scoremsg:new Array(Object.keys(this.scoredatas).length)
       }
     },
     mounted(){

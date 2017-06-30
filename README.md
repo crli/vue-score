@@ -50,7 +50,7 @@ npm install vue-score
              'title':'总分',
              'value':null,
              'msg':['非常差','很差','一般','很好','非常好']
-           }
+           },
            'Star2':{
              'title':'环境',
              'value':null,

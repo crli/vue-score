@@ -1,14 +1,14 @@
 <template>
-  <div class="star-box">
-    <div class="star" v-for="(item,key,index) in datas" >
-      <div class="nm">{{item.title}}</div>
-      <span class="star-pic">
-        <i class="i" :style="'width:' + item.value*20 + '%'"></i>
-        <span class="star-select">
-          <i class="hand" v-for="n in 5" @click="select(n,key,index,item.msg)"></i>
-        </span>
-      </span>
-      <span class="start-msg">{{starmsg[index]}}</span>
+  <div class="score-box">
+    <div class="score" v-for="(item,key,index) in datas" >
+      <div class="title">{{item.title}}</div>
+      <div class="score-pic">
+        <div class="score-range" :style="'width:' + item.value*20 + '%'"></div>
+        <div class="score-select">
+          <div class="hand" v-for="n in 5" @click="select(n,key,index,item.msg)"></div>
+        </div>
+      </div>
+      <div class="scoret-msg">{{scoremsg[index]}}</div>
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@
     data(){
       return{
         datas:this.scoredatas,
-        starmsg:[]
+        scoremsg:[]
       }
     },
     mounted(){
@@ -29,7 +29,7 @@
           type: Object,
           default(){
             return {
-              'Star1':{
+              'score1':{
                 'title':'总分',
                 'value':null,
                 'msg':['非常差','很差','一般','很好','非常好']
@@ -50,7 +50,7 @@
        */
       select(n,key,index,msg){
         this.datas[key].value = n;
-        this.starmsg.splice(index, 1,msg[n-1]);
+        this.scoremsg.splice(index, 1,msg[n-1]);
         this.$emit('toscore',[key,n])
       },
     }
@@ -58,41 +58,43 @@
 </script>
 <style scoped lang="scss">
 @import '../assets/mixin';
-    .star{
+    .score{
       display:flex;
       align-items:center;
-      .nm{
+      .title{
         width:50px;
         font-size: 15px
       }
-      .star-pic{display:inline-block;
-        @include wh(272px,36px);
+      .score-pic{
+        display:inline-block;
+        text-align: left;
+        @include wh(152px,20px);
         background: url('../assets/xd.png') no-repeat;
         background-size: auto 100%;
         position:relative;
-        .i{
+        .score-range{
           background: url('../assets/xdh.png')no-repeat;
           display: inline-block;
-          height: 36px;
+          height: 20px;
           background-size: auto 100%;
           vertical-align: top;
         }
-        .star-select{
+        .score-select{
           position:absolute;
           z-index: 10;
           top:0;
           left:0;
           display: inline-block;
-          @include wh(272px,36px);
+          @include wh(152px,20px);
           display:flex;
           justify-content:space-between;
           .hand{
-            @include wh(36px, 36px);
+            @include wh(20px, 20px);
             display:block;
           }
         }
       }
-      .start-msg{
+      .scoret-msg{
         margin-left: 30px;
         display:inline-block;
         font-size: 14px
